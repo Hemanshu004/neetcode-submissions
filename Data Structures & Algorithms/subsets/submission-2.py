@@ -1,16 +1,12 @@
 class Solution:
-    def subsets(self, nums: List[int]) -> List[List[int]]:
-        res=[]
-        def dfs(i,subset):
+    def subsetXORSum(self, nums: List[int]) -> int:
+        
+        def dfs(i,total):
             if i==len(nums):
-                res.append(subset.copy())
-                return 
-            subset.append(nums[i])
+                return total
 
-            dfs(i+1,subset)
+            return dfs(i+1,total^nums[i])+dfs(i+1,total)
+        
+        return dfs(0,0)
 
-            subset.pop()
-
-            dfs(i+1,subset)
-        dfs(0,[])
-        return res
+                
